@@ -53,22 +53,16 @@ public class SecurityConfig {
 //			.requestMatchers("/api/**").authenticated()
 //			.anyRequest().permitAll()
 //		);
-        
-        http.csrf(AbstractHttpConfigurer::disable)
-        .authorizeHttpRequests((authorizeHttpRequests) ->
-        authorizeHttpRequests.requestMatchers("/api/**").permitAll()
-        .anyRequest().authenticated());
-
 
         
-//        http
-//                .csrf(csrf -> csrf.disable())
-//                .authorizeHttpRequests(authorizeRequests ->
-//                        authorizeRequests
-//                                .requestMatchers("/api/**").authenticated()
-//                                .anyRequest().permitAll()
-//                )
-//                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+        http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authorizeRequests ->
+                        authorizeRequests
+                                .requestMatchers("/api/**").authenticated()
+                                .anyRequest().permitAll()
+                )
+                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
